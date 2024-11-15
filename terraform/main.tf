@@ -47,6 +47,30 @@ resource "google_firestore_database" "tldd" {
   type     = "FIRESTORE_NATIVE"
 }
 
+resource "google_service_account" "tldd" {
+  account_id = "sa-tldd-cloud-run"
+  project    = var.project
+}
+
+data "google_iam_policy" "tldd-firestore"{
+  binding {
+    role = "roles/datastore.user"
+    members = ["serviceAccount:${google_service_account.tldd.email}"]
+  }
+}
+
+data "google_iam_policy" "tldd-pdf-bucket" {
+  binding {
+    role = "roles/storage.objectViewer"
+    members = ["serviceAccount:${google_service_account.tldd.email}"]
+  }
+}
+
+resource "google_storage_bucket_iam_policy" "tldd-pdf-bucket-policy" { 
+  bucket = google_storage_bucket.tldd.name
+  policy_data = data.google_iam_policy.tldd-pdf-bucket.policy
+}
+
 resource "google_cloud_run_service" "tldd" {
   name     = "tldd"
   location = var.region
