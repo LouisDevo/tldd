@@ -8,6 +8,11 @@ resource "google_storage_bucket" "tldd" {
   location = var.region
 }
 
+resource "google_storage_bucket" "tldd-frontend" {
+  name     = "tldd-frontend"
+  location = var.region
+}
+
 terraform {
   backend "gcs" {
     bucket = "spectacles-tldd_tf_state"
