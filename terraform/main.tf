@@ -73,6 +73,21 @@ data "google_iam_policy" "tldd-pdf-secrets" {
   }
 }
 
+resource "google_service_account_iam_policy" "tldd-firestore-account-iam" {
+  service_account_id = google_service_account.tldd.id
+  policy_data        = data.google_iam_policy.tldd-firestore.policy_data
+}
+
+resource "google_service_account_iam_policy" "tld-bucket-account-iam" {
+  service_account_id = google_service_account.tldd.id
+  policy_data        = data.google_iam_policy.tldd-pdf-bucket.policy_data
+}
+
+resource "google_service_account_iam_policy" "tld-secrets-account-iam" {
+  service_account_id = google_service_account.tldd.id
+  policy_data        = data.google_iam_policy.tldd-pdf-secrets.policy_data
+}
+
 resource "google_storage_bucket_iam_policy" "tldd-pdf-bucket-policy" { 
   bucket = google_storage_bucket.tldd.name
   policy_data = data.google_iam_policy.tldd-pdf-bucket.policy_data
