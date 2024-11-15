@@ -115,7 +115,7 @@ jobs:
           GOOGLE_APPLICATION_CREDENTIALS: ../tmp/keys/google_application_credentials.json
         run: |
           gcloud auth activate-service-account --key-file=../tmp/keys/google_application_credentials.json
-          gsutil -m cp -r dist/bundle.js gs://tldd-frontend/
-          gsutil acl ch -u AllUsers:R gs://tldd-frontend/bundle.js
-          gsutil cors set cors-config.json gs://tldd-frontend
-          gsutil setmeta -h "Cache-Control:no-store" gs://tldd-frontend/bundle.js
+          gsutil -m cp -r dist/bundle.js gs://gcs-tldd-extension-bucket/
+          gsutil acl ch -u AllUsers:R gs://gcs-tldd-extension-bucket/bundle.js
+          gsutil cors set cors-config.json gs://gcs-tldd-extension-bucket/
+          gsutil setmeta -h "Cache-Control:no-store" gs://gcs-tldd-extension-bucket/bundle.js
