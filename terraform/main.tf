@@ -66,7 +66,7 @@ data "google_iam_policy" "tldd-pdf-bucket" {
   }
 }
 
-data "google_iam_policy" "tldd-pdf-secret" {
+data "google_iam_policy" "tldd-pdf-secrets" {
   binding {
     role = "roles/secretmanager.secretAccessor"
     members = ["serviceAccount:${google_service_account.tldd.email}"]
