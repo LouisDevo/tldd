@@ -79,7 +79,7 @@ resource "google_cloud_run_service" "tldd" {
   template {
     
     spec {
-      service_account_name = google_service_account.tldd.name
+      service_account_name = google_service_account.tldd.email  # It may say name, but the docs say email!
       containers {
         image = "${var.region}-docker.pkg.dev/${var.project}/tldd/tldd:${var.run_hash}"
         ports {
