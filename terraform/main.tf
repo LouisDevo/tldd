@@ -75,8 +75,11 @@ resource "google_cloud_run_service" "tldd" {
   name     = "tldd"
   location = var.region
 
+
   template {
+    
     spec {
+      service_account_name = google_service_account.tldd.name
       containers {
         image = "${var.region}-docker.pkg.dev/${var.project}/tldd/tldd:${var.run_hash}"
         ports {
