@@ -9,7 +9,7 @@ resource "google_storage_bucket" "tldd" {
 }
 
 resource "google_storage_bucket" "tldd-frontend" {
-  name     = "tldd-frontend"
+  name     = "gcs-tldd-frontend-bucket"
   location = var.region
 }
 
