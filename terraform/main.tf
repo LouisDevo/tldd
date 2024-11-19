@@ -10,7 +10,7 @@ resource "google_storage_bucket" "tldd" {
 
 terraform {
   backend "gcs" {
-    bucket = "tf-state-vertex-dashboards"
+    bucket = "tldd-tf-state"
     prefix = "tldd"
   }
 }
@@ -49,7 +49,7 @@ resource "google_cloud_run_service" "tldd" {
   template {
     spec {
       containers {
-        image = "us-central1-docker.pkg.dev/${var.project}/tldd/tldd:${var.run_hash}"
+        image = "europe-west4-docker.pkg.dev/${var.project}/tldd/tldd:${var.run_hash}"
         ports {
           container_port = 8000
         }
