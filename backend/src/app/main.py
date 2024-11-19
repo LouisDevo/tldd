@@ -51,7 +51,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Configure Firestore client
-firestore_client = FirestoreClient(project=PROJECT_ID, database=PROJECT_ID)
+firestore_client = FirestoreClient(project=PROJECT_ID, database="tldd")
 
 
 @app.get("/")
