@@ -176,7 +176,7 @@ Once you commit and push the changes to your repository, GitHub Actions will aut
 4. **Set up a `tldd_api` user attribute in Looker:**
    - Go to the "Admin" section of your Looker instance.
    - Navigate to "User Attributes".
-   - Click on "New User Attribute".
+   - Click on "New User Attribute".t
    - Set the name to `tldd_api`.
    - Set the default value to the Cloud Run URL of your deployed backend.
    - Click "Save".
