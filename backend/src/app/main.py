@@ -30,7 +30,7 @@ from app.models import (
 
 PROJECT_ID = "vertex-dashboards"
 K_SERVICE = os.getenv("K_SERVICE")
-CLOUD_RUN_CRED = os.getenv("CLOUD_RUN_KEY")
+CLOUD_RUN_CRED = os.getenv("CLOUD_RUN_KEY", "")
 
 
 app = FastAPI()
