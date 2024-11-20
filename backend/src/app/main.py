@@ -16,6 +16,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from google.cloud.firestore import Client as FirestoreClient
 from google.cloud.logging import Client as LoggingClient
 from google.cloud.storage import Client as StorageClient
+from google.oauth2 import service_account
 from vertexai.generative_models import GenerativeModel, Part
 
 from app.models import (
@@ -28,6 +29,7 @@ from app.models import (
 
 PROJECT_ID = "vertex-dashboards"
 K_SERVICE = os.getenv("K_SERVICE")
+CLOUD_RUN_CRED = os.getenv("CLOUD_RUN_KEY")
 
 
 app = FastAPI()
@@ -50,8 +52,10 @@ if K_SERVICE and K_SERVICE != "dev":
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+credentials = service_account.Credentials.from_service_account_info(CLOUD_RUN_CRED) 
+
 # Configure Firestore client
-firestore_client = FirestoreClient(project=PROJECT_ID, database="tldd")
+firestore_client = FirestoreClient(project=PROJECT_ID, database="tldd", credentials=credentials)
 
 
 @app.get("/")

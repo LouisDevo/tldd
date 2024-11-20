@@ -55,9 +55,11 @@ jobs:
       - name: Setup Google Application Credentials
         env:
           SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_SA_KEY }}
+          CLOUD_RUN_KEY: ${{ secrets.GCP_CLOUD_RUN_SA}}
         run: |
           mkdir -p tmp/keys
           echo $SERVICE_ACCOUNT_KEY > tmp/keys/google_application_credentials.json
+          echo $CLOUD_RUN_KEY > tmp/keys/cloud_run_sa_key.json
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -86,7 +88,7 @@ jobs:
         env:
           IMAGE_NAME: europe-west4-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/tldd/tldd:${{ github.sha }}
         run: |
-          cp ../tmp/keys/google_application_credentials.json .
+          cp ../tmp/keys/cloud_run_sa_key.json .
           docker build -t $IMAGE_NAME . --platform linux/amd64
           docker push $IMAGE_NAME
 
