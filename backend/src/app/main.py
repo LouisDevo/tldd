@@ -53,7 +53,9 @@ if K_SERVICE and K_SERVICE != "dev":
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-credentials = service_account.Credentials.from_service_account_info(json.load(CLOUD_RUN_CRED))
+
+cred_file = open(CLOUD_RUN_CRED)
+credentials = service_account.Credentials.from_service_account_info(json.load(cred_file))
 
 # Configure Firestore client
 firestore_client = FirestoreClient(project=PROJECT_ID, database="tldd", credentials=credentials)
