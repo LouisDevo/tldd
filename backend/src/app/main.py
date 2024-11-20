@@ -1,6 +1,7 @@
 """Main module for the vertex_dashboards package."""
 
 import base64
+import json
 import logging
 import os
 import re
@@ -52,7 +53,7 @@ if K_SERVICE and K_SERVICE != "dev":
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-credentials = service_account.Credentials.from_service_account_info(CLOUD_RUN_CRED) 
+credentials = service_account.Credentials.from_service_account_info(json.loads(CLOUD_RUN_CRED))
 
 # Configure Firestore client
 firestore_client = FirestoreClient(project=PROJECT_ID, database="tldd", credentials=credentials)
